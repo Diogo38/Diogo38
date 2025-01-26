@@ -11,8 +11,7 @@
         <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
         <script type="text/javascript" src="js/config.js"></script>
         <script src="js/main.js"></script>
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2614793765490902"
-     crossorigin="anonymous"></script>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2614793765490902" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="container">
@@ -21,8 +20,20 @@
             </div>
             
             <div class="simple-container">
-                <input type="file" id="avatar" name="avatar" accept="csv">
-                <button id="fileSubmit">Submit</button>
+				<div class="row">
+					<div class="flex-item-left">
+						<input type="file" id="avatar" name="avatar" accept="csv">
+						<button id="fileSubmit">Submit</button>
+					</div>
+					<div class="flex-item-right">
+						  <label for="fname">Year of the excel file:</label>
+						  <input type="text" id="input-year" name="fname"><br><br>
+						  <div class="column">
+							<label for="lname">Dividends year before excel file (values splited by ";"):</label>
+							<input type="text" id="input-dividends" name="lname" value="example: 17,50; 7,74; 21,95; 23,51; 9,37; 18,52; 25,52; 10,69; 25,20; 19,43; 13,43; 23,57"><br><br>
+						  </div>  
+					</div>
+				</div>  
             </div>
             <div class="row">
                 <div class="flex-item-left">

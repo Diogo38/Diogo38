@@ -6,7 +6,10 @@ var fileHeader;
 const totalByMonth = {};
 const myStocksTotal = {};
 const yearsMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const previousYear = yearToAnalyse - 1;
+//var previousYear = yearToAnalyse - 1;
+var yearToAnalyse = 0
+var previousYear = 0;
+var previousYearValueByMonth = [];
 
 function getMonthFromDate(dateToParse){
 	const result1 = dateToParse.split(' ');
@@ -352,6 +355,38 @@ function readFile(fileToLoad){
       }
 }
 
+function getTheArrayFromInput(theStringArray){
+	let inputString = theStringArray;
+	let formattedString = inputString.replace(/,/g, '.');
+	let stringArray = formattedString.split(';');
+	let numberArray = stringArray.map(item => parseFloat(item.trim()));
+	
+	
+	
+	// Step 3: Check if the array has less than 12 elements
+	if (numberArray.length < 12) {
+		// Add zeros at the beginning of the array
+		while (numberArray.length < 12) {
+			numberArray.unshift(0);
+		}
+	} else if (numberArray.length > 12) {
+		// Trim the array to only include the first 12 elements
+		numberArray = numberArray.slice(0, 12);
+	}
+	
+	return numberArray;
+}
+
+function inputYear(theInputYear) {
+	let valueYear = parseInt(theInputYear);
+	if (!valueYear) {
+    // Get the current year
+    return parseInt(new Date().getFullYear().toString());
+	}
+	return valueYear;
+}
+
+
 $(document).ready(function(){
     $('input[type="file"]').change(function(e){
         fileName = e.target.files[0].name;
@@ -360,6 +395,10 @@ $(document).ready(function(){
     });
 
     $( "#fileSubmit" ).click(function() {
+		yearToAnalyse = inputYear(document.getElementById("input-year").value);
+		previousYearValueByMonth = getTheArrayFromInput(document.getElementById("input-dividends").value)
+		
+		previousYear = yearToAnalyse - 1
         readFile(fileContent);
     });
 });
